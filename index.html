@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>YENA01093-WEB · 프로젝트 입주 안내도</title>
+<meta name="description" content="유비포스 개발자가 만든 웹사이트·시스템 라이브 프로젝트 안내도">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&family=Cormorant+Garamond:ital,wght@1,500;1,600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --board:#1b1e21;
+    --board-deep:#141618;
+    --board-sheen:#252a2e;
+    --slot:#202427;
+    --slot-edge:#30363b;
+    --brass:#cda44e;
+    --brass-bright:#e6c26f;
+    --brass-dim:#8c7440;
+    --steel:#8b949c;
+    --ink:#eef1f2;
+    --ink-dim:#b7bfc4;
+    --open:#5fae72;
+    font-family:'Archivo', ui-sans-serif, system-ui, sans-serif;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; }
+  body{
+    background:
+      radial-gradient(1200px 500px at 50% -8%, var(--board-sheen), transparent 65%),
+      var(--board);
+    color:var(--ink);
+    padding-block:0;
+  }
+  a{ color:inherit; }
+  .wrap{
+    max-width:980px;
+    margin:0 auto;
+    padding-inline:20px;
+  }
+
+  /* ---------- header board ---------- */
+  header.board-head{
+    padding:56px 0 28px;
+    text-align:center;
+    border-bottom:1px solid var(--slot-edge);
+  }
+  .plate{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:5px 14px;
+    border:1px solid var(--brass-dim);
+    border-radius:2px;
+    font-size:11px;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    color:var(--brass);
+    margin-bottom:22px;
+  }
+  .plate .dot{
+    width:6px; height:6px; border-radius:50%;
+    background:var(--open);
+    box-shadow:0 0 6px 1px var(--open);
+  }
+  h1.board-title{
+    margin:0;
+    font-weight:800;
+    font-size:clamp(30px, 6vw, 52px);
+    letter-spacing:0.02em;
+    color:var(--ink);
+    text-wrap:balance;
+  }
+  h1.board-title .accent{ color:var(--brass-bright); }
+  .board-sub{
+    margin-top:14px;
+    font-family:'Cormorant Garamond', 'Noto Serif KR', serif;
+    font-style:italic;
+    font-size:19px;
+    color:var(--ink-dim);
+    text-wrap:balance;
+  }
+  .stat-row{
+    margin-top:30px;
+    display:flex;
+    justify-content:center;
+    gap:0;
+    flex-wrap:wrap;
+    border:1px solid var(--slot-edge);
+    border-radius:4px;
+    overflow:hidden;
+  }
+  .stat{
+    padding:14px 26px;
+    border-right:1px solid var(--slot-edge);
+    min-width:130px;
+  }
+  .stat:last-child{ border-right:none; }
+  .stat b{
+    display:block;
+    font-size:22px;
+    font-weight:800;
+    color:var(--brass-bright);
+    font-variant-numeric:tabular-nums;
+  }
+  .stat span{
+    display:block;
+    margin-top:3px;
+    font-size:10.5px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--steel);
+  }
+
+  /* ---------- floor nav ---------- */
+  nav.floor-nav{
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    flex-wrap:wrap;
+    padding:20px 0;
+    border-bottom:1px solid var(--slot-edge);
+  }
+  nav.floor-nav a{
+    font-size:12px;
+    letter-spacing:0.06em;
+    text-decoration:none;
+    color:var(--ink-dim);
+    border:1px solid var(--slot-edge);
+    padding:6px 13px;
+    border-radius:20px;
+    transition:border-color 160ms ease, color 160ms ease;
+  }
+  nav.floor-nav a:hover, nav.floor-nav a:focus-visible{
+    color:var(--brass-bright);
+    border-color:var(--brass-dim);
+    outline:none;
+  }
+
+  /* ---------- floor sections ---------- */
+  section.floor{
+    padding:44px 0 12px;
+    scroll-margin-top:16px;
+  }
+  .floor-head{
+    display:flex;
+    align-items:baseline;
+    gap:14px;
+    margin-bottom:22px;
+  }
+  .floor-num{
+    font-weight:800;
+    font-size:34px;
+    color:var(--brass);
+    text-shadow:0 1px 0 rgba(255,255,255,0.12), 0 -1px 0 rgba(0,0,0,0.55);
+    line-height:1;
+  }
+  .floor-name{
+    font-size:14px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--steel);
+  }
+  .floor-rule{
+    flex:1 1 auto;
+    height:1px;
+    background:linear-gradient(90deg, var(--brass-dim), transparent);
+    margin-left:6px;
+  }
+
+  .slots{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(270px, 1fr));
+    gap:14px;
+  }
+  .slot{
+    background:var(--slot);
+    border:1px solid var(--slot-edge);
+    border-radius:6px;
+    padding:16px 18px;
+    display:flex;
+    flex-direction:column;
+    gap:9px;
+    transition:box-shadow 200ms ease, border-color 200ms ease, transform 200ms ease;
+  }
+  .slot:hover, .slot:focus-within{
+    border-color:var(--brass-dim);
+    box-shadow:0 0 0 1px var(--brass-dim), 0 10px 26px -14px rgba(205,164,78,0.35);
+    transform:translateY(-1px);
+  }
+  .slot-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:10px;
+  }
+  .unit{
+    font-size:11px;
+    color:var(--brass-dim);
+    letter-spacing:0.08em;
+    font-variant-numeric:tabular-nums;
+  }
+  .status{
+    font-size:10px;
+    letter-spacing:0.08em;
+    color:var(--open);
+    display:inline-flex;
+    align-items:center;
+    gap:5px;
+  }
+  .status i{
+    width:5px; height:5px; border-radius:50%;
+    background:var(--open);
+    box-shadow:0 0 5px 1px var(--open);
+    display:inline-block;
+  }
+  .tenant{
+    font-size:16.5px;
+    font-weight:700;
+    color:var(--ink);
+    letter-spacing:0.01em;
+  }
+  .tenant-desc{
+    font-size:12.5px;
+    line-height:1.55;
+    color:var(--ink-dim);
+    flex:1 1 auto;
+  }
+  .slot-links{
+    display:flex;
+    gap:16px;
+    margin-top:2px;
+    font-size:12px;
+  }
+  .slot-links a{
+    text-decoration:none;
+    color:var(--brass-bright);
+    border-bottom:1px solid transparent;
+  }
+  .slot-links a.secondary{ color:var(--steel); }
+  .slot-links a:hover, .slot-links a:focus-visible{
+    border-bottom-color:currentColor;
+    outline:none;
+  }
+
+  /* ---------- footer / management office ---------- */
+  footer.office{
+    margin-top:50px;
+    border-top:1px solid var(--slot-edge);
+    padding:34px 0 60px;
+    text-align:center;
+  }
+  .office-label{
+    font-size:11px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--steel);
+    margin-bottom:10px;
+  }
+  .office-contact{
+    font-size:16px;
+    font-weight:600;
+  }
+  .office-contact a{
+    text-decoration:none;
+    color:var(--brass-bright);
+    border-bottom:1px solid var(--brass-dim);
+  }
+  .office-more{
+    margin-top:16px;
+    font-size:12.5px;
+    color:var(--ink-dim);
+  }
+  .office-more a{
+    color:var(--ink-dim);
+    text-decoration:underline;
+    text-underline-offset:2px;
+  }
+  .office-more a:hover{ color:var(--brass-bright); }
+
+  @media (prefers-reduced-motion: reduce){
+    .slot{ transition:none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="board-head">
+  <div class="wrap">
+    <div class="plate"><span class="dot"></span> Directory Updated 2026.09.16</div>
+    <h1 class="board-title">YENA01093<span class="accent">-WEB</span></h1>
+    <p class="board-sub">프로젝트 입주 안내도 — 지금 운영 중인 웹사이트 목록</p>
+    <div class="stat-row">
+      <div class="stat"><b>13</b><span>Live Tenants</span></div>
+      <div class="stat"><b>24</b><span>Repos Built</span></div>
+      <div class="stat"><b>4</b><span>Floors</span></div>
+      <div class="stat"><b>'26.04–</b><span>Since</span></div>
+    </div>
+  </div>
+</header>
+
+<nav class="floor-nav wrap">
+  <a href="#f1">1F 상가·생활서비스</a>
+  <a href="#f2">2F 공공·기관</a>
+  <a href="#f3">3F 미디어·디스플레이</a>
+  <a href="#fr">R 관리동·도구</a>
+</nav>
+
+<main class="wrap">
+
+  <section class="floor" id="f1">
+    <div class="floor-head">
+      <span class="floor-num">1F</span>
+      <span class="floor-name">상가 · 생활서비스</span>
+      <span class="floor-rule"></span>
+    </div>
+    <div class="slots">
+
+      <article class="slot">
+        <div class="slot-top"><span class="unit">1F-101</span><span class="status"><i></i>운영중</span></div>
+        <div class="tenant">프레임샵</div>
+        <p class="tenant-desc">액자 제작·주문 웹사이트</p>
+        <div class="slot-links">
+          <a href="https://frameshop-two.vercel.app">사이트 방문 →</a>
+          <a class="secondary" href="https://github.com/yena01093-web/frameshop">코드 보기</a>
+        </div>
+      </article>
+
+      <article class="slot">
+        <div class="slot-top"><span class="unit">1F-102</span><span class="status"><i></i>운영중</span></div>
+        <div class="tenant">현대인쇄</div>
+        <p class="tenant-desc">인쇄소 소개 웹사이트</p>
+        <div class="slot-links">
+          <a href="https://hyundai-print.vercel.app">사이트 방문 →</a>
+          <a class="secondary" href="https://github.com/yena01093-web/hyundai-print">코드 보기</a>
+        </div>
+      </article>
+
+      <article class="slot">
+        <div class="slot-top"><span class="unit">1F-103</span><span class="status"><i></i>운영중</span></div>
+        <div class="tenant">유로헬스 &amp; 스파</div>
+        <p class="tenant-desc">EuroHealth and EuroSpa fitness and spa complex website</p>
+        <div class="slot-links">
+          <a href="https://euro-health-spa.vercel.app">사이트 방문 →</a>
+          <a class="secondary" href="https://github.com/yena01093-web/euro-health-spa">코드 보기</a>
+        </div>
+      </article>
+
+      <article class="slot">
+        <div class="slot-top"><span class="unit">1F-104</span><span class="status"><i></i>운영중</span></div>
+        <div class="tenant">UBPOS 시니어</div>
+        <p class="tenant-desc">시니어케어 센터 웹사이트</p>
+        <div class="slot-links">
+          <a href="https://ubpos-senior.vercel.app">사이트 방문 →</a>
+          <a class="secondary" href="https://github.com/yena01093-web/ubpos-senior">코드 보기</a>
+        </div>
+      </article>
+
+      <article class="slot">
+        <div class="slot-top"><span class="unit">1F-105</span><span class="status"><i></i>운영중</span></div>
+        <div class="tenant">UBPOS 스터디카페</div>
+        <p class="tenant-desc">스터디카페 안내·예약 웹사이트</p>
+        <div class="slot-links">
+          <a href="https://ubpos-studycafe.vercel.app">사이트 방문 →</a>
+          <a class="secondary" href="https://github.com/yena01093-web/ubpos-studycafe">코드 보기</a>
+        </div>
+      </article>
+
+      <article class="slot">
+        <div class="slot-top"><span class="unit">1F-106</span><span class="status"><i></i>운영중</span></div>
+        <div class="tenant">UBPOS 레스토랑</div>
+        <p class="tenant-desc">약채락 예약 시스템</p>
+        <div class="slot-links">
+          <a href="https://ubpos-restaurant.vercel.app">사이트 방문 →</a>
+          <a class="secondary" href="https://github.com/yena01093-web/ubpos-restaurant">코드 보기</a>
+        </div>
+      </article>
+
+      <article class="slot">
+        <div class="slot-top"><span class="unit">1F-107</span><span class="status"><i></i>운영중</span></div>
+        <div class="tenant">UBPOS 푸드</div>
+        <p class="tenant-desc">베이커리·카페 주문 랜딩페이지</p>
+        <div class="slot-links">
+          <a href="https://ubpos-food.vercel.app">사이트 방문 →</a>
+          <a class="secondary" href="https://github.com/yena01093-web/ubpos-food">코드 보기</a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="floor" id="f2">
+    <div class="floor-head">
+      <span class="floor-num">2F</span>
+      <span class="floor-name">공공 · 기관</span>
+      <span class="floor-rule"></span>
+    </div>
+    <div class="slots">
+
+      <article class="slot">
+        <div class="slot-top"><span class="unit">2F-201</span><span class="status"><i></i>운영중</span></div>
+        <div class="tenant">단양군의회</div>
+        <p class="tenant-desc">지방의회 소개 웹사이트</p>
+        <div class="slot-links">
+          <a href="https://danyang-council.vercel.app">사이트 방문 →</a>
+          <a class="secondary" href="https://github.com/yena01093-web/danyang-council">코드 보기</a>
+        </div>
+      </article>
+
+      <article class="slot">
+        <div class="slot-top"><span class="unit">2F-202</span><span class="status"><i></i>운영중</span></div>
+        <div class="tenant">산지관리 안내 예제</div>
+        <p class="tenant-desc">Forest and mountain land administrative agency sample website</p>
+        <div class="slot-links">
+          <a href="https://wbc-forest-agency.vercel.app">사이트 방문 →</a>
+          <a class="secondary" href="https://github.com/yena01093-web/wbc-forest-agency">코드 보기</a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="floor" id="f3">
+    <div class="floor-head">
+      <span class="floor-num">3F</span>
+      <span class="floor-name">미디어 · 디스플레이</span>
+      <span class="floor-rule"></span>
+    </div>
+    <div class="slots">
+
+      <article class="slot">
+        <div class="slot-top"><span class="unit">3F-301</span><span class="status"><i></i>운영중</span></div>
+        <div class="tenant">DB Production</div>
+        <p class="tenant-desc">DB Production video studio website</p>
+        <div class="slot-links">
+          <a href="https://db-production.vercel.app">사이트 방문 →</a>
+          <a class="secondary" href="https://github.com/yena01093-web/db-production">코드 보기</a>
+        </div>
+      </article>
+
+      <article class="slot">
+        <div class="slot-top"><span class="unit">3F-302</span><span class="status"><i></i>운영중</span></div>
+        <div class="tenant">UBPOS TV</div>
+        <p class="tenant-desc">매장용 디스플레이 화면</p>
+        <div class="slot-links">
+          <a href="https://ubpos-tv.vercel.app">사이트 방문 →</a>
+          <a class="secondary" href="https://github.com/yena01093-web/ubpos-tv">코드 보기</a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="floor" id="fr">
+    <div class="floor-head">
+      <span class="floor-num">R</span>
+      <span class="floor-name">관리동 · 도구</span>
+      <span class="floor-rule"></span>
+    </div>
+    <div class="slots">
+
+      <article class="slot">
+        <div class="slot-top"><span class="unit">R-01</span><span class="status"><i></i>운영중</span></div>
+        <div class="tenant">업비트 트레이드봇 대시보드</div>
+        <p class="tenant-desc">실시간 매매 봇 모니터링 대시보드</p>
+        <div class="slot-links">
+          <a href="https://upbit-tradebot-dashboard.vercel.app">사이트 방문 →</a>
+          <a class="secondary" href="https://github.com/yena01093-web/upbit-tradebot-dashboard">코드 보기</a>
+        </div>
+      </article>
+
+      <article class="slot">
+        <div class="slot-top"><span class="unit">R-02</span><span class="status"><i></i>운영중</span></div>
+        <div class="tenant">UBPOS 다이어리</div>
+        <p class="tenant-desc">개인 기록 도구 (비공개 저장소)</p>
+        <div class="slot-links">
+          <a href="https://ubpos-diary.vercel.app">사이트 방문 →</a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="office">
+  <div class="wrap">
+    <div class="office-label">관리사무소 · Management Office</div>
+    <div class="office-contact">문의 : <a href="mailto:yena01093@gmail.com">yena01093@gmail.com</a></div>
+    <div class="office-more">전체 24개 저장소는 <a href="https://github.com/yena01093-web">github.com/yena01093-web</a> 에서 볼 수 있습니다.</div>
+  </div>
+</footer>
+
+</body>
+</html>
